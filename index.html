@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyAim - Scenario Builder Documentation </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>   
+    <nav>
+        <ul>
+            <li><a href="#Introduction">Introduction</a></li>
+            <li><a href="#StaticScenarios">Static Scenarios</a></li>
+            <li><a href="#DynamicClicking">Dynamic Clicking Scenarios</a></li>
+            <li><a href="#GroundTracking">Ground Tracking Scenarios</a></li>
+            <li><a href="#AirScenarios">Air Scenarios</a></li>
+            <li><a href="#DashSkill">Dash Skill</a></li>
+            <li><a href="#GauntletScenarios">Gauntlet Scenarios</a></li>
+        </ul>
+    </nav>
+
+    
+    <main>
+        <div class="content-container">
+           
+            <header>
+                <h1>EasyAim - Scenario Builder Documentation </h1>
+            </header>
+
+
+            <section id="Introduction">
+                <h2>Introduction</h2>
+                <p> This is the documentation page for the Scenario Builder of EasyAim Trainer.</p>
+                <p> If you still have questions tag @mira_r3d on EasyAim Discord </p>
+                <a href="https://discord.com/invite/easyaim"> EasyAim Discord </a>
+            </section>
+
+
+            <section id="StaticScenarios">
+                <h2>Static Scenarios</h2>
+                <p>To create static scenarios is pretty simple, all you need to do is create a scenario in the builder
+                    then set it to Clicking category, after this you need to create the target the best kind of target
+                    for this category is Sphere. After creating the target go to behavior, create a behavior → frame →
+                    new action and select "Set Waypoint". Set Waypoint is where you will set up the bot spawn.</p>
+                <p>Teleport = On |</p>
+                <p>Prevent Targets Collision On + set it to 2 or 3 for a good distance from each other |</p>
+                <p>After that you will need to choose a type of waypoint, for static scenarios doesnt matter wich one
+                    you will pick so choose whatever you want. After choosing it you will set the values for the bot
+                    spawn.</p>
+                <p>X = Horizontal Spawn values</p>
+                <p>Y = Vertical Spawn values</p>
+                <p>Z = Forward / Backward Spawn Values ( if you choose Orbit, Distance is the same as Z Axis).</p>
+                <p> We have a Preset to help you to understand + create your scenarios faster:</p>
+                <a href="https://easyaim.com/scenarios/static-clicking-preset/694268e510566bb1065713ee"> Static Preset
+                </a>
+            </section>
+
+            <section id="DynamicClicking">
+                <h2>Dynamic Clicking Scenarios</h2>
+                <p>For Dynamic the idea is the same but here we need to use Orbit to set better movement for our
+                    Targets.</p>
+                <p> Here you need to set the spawn to Orbit but also add some new Actions to the spawn behavior </p>
+                <p> Actions you will need:</p>
+                <p> Max Speed (Controls the target's speed)</p>
+                <p> Rubber Stiffness (Controls an invisible line that pulls the target to the direction)(XYZ) </p>
+                <p> Orbit Restriction (Controls the limits for the target move around) </p>
+
+                <p> After setting up all this you will need to create a new behavior for the targets movement. To Create
+                    movement behaviors you will need
+                    Set Waypoint but for movement you disable the teleport option.
+                </p>
+                <p> You will set XYZ Axis just like the spawn but for movement so just try values and limits, also, the
+                    higher the rubber stiffness more reactive the target will be. </p>
+                <p> Make 2 Frames for movement, Left and Right. On X Axis you will set negative number for left and
+                    positive number for right.</p>
+                <p> The distance on movement needs to be the same as the Orbit restriction, if you set it different the
+                    target won't work correctly. The Y Axis you will set a range of a negative number and a positive
+                    number, for example:</p>
+                <p> Y Axis = -15 / 15. This means that the bot can move in a range of -15 (down) and +15 (up).</p>
+                <p> After setting this things all you will need to do is test and improve your values and behaviors.</p>
+                <a href="https://easyaim.com/scenarios/dynamic-clicking-preset/69426d1910566bb1065714ea">Dynamic
+                    Clicking Preset </a>
+            </section>
+
+
+            <section id="GroundTracking">
+                <h2>Ground Tracking Scenarios</h2>
+                <p> For ground tracking you will keep the same attributes of dynamic clicking but now the target model
+                    will be a pill and you will set his Y Spawn Axis to the ground.</p>
+                <p> After setting it to the ground and changing the model to pill we need to make sure that the bot
+                    won't fly around the map, so, go on Max Speed and set Y to 0 </p>
+                <p> Now all you need to do is change values to fit what you want to create, making it fast if its
+                    reactive,slow and smoother for categories like stability, etc... </p>
+                <a href="https://easyaim.com/scenarios/ground-tracking-preset/6942a504efdc1a0a157b8e70"> Ground Tracking
+                    Preset </a>
+            </section>
+
+        
+            <section id="AirScenarios">
+                <h2>Air Scenarios</h2>
+                <p>For air scenarios all you need to do is get the dynamic logic and apply to a Sphere Target with all
+                    axis speed set </p>
+                <p> You can make it smooth, reactive, impossible to hit, all you want, just try values to fit what you
+                    want.</p>
+                <a href="https://easyaim.com/scenarios/floating-tracking-preset/6942a77defdc1a0a157b9392"> Air Preset
+                </a>
+            </section>
+
+            
+            <section id="DashSkill">
+                <h2>Dash Skill</h2>
+                <p>To add a skill like Dashes to a target it’s necessary to understand how EasyAim timings work.</p>
+
+                <p> First you need to set a target time like, by default 0 (The target will start the timer at 0 and go
+                    up).
+                    After setting up the target time you can make your default movement configuration but you need to
+                    add one new action called “On Target Time Reached” on your Target’s movement behavior.
+                </p>
+
+
+                <p>
+                    After that you will need to create a new behavior for your Dash Skill (or whatever you want to call
+                    it).
+                    Also create a “reset speed” frame on your movement behavior.
+
+                    How it works:
+                </p>
+                <p>
+                    The bot starts his behavior on time 0, he moves normally like designed but when it hits the time
+                    that you set up on “On Target Time Reached” it applies the Dash Skill Behavior.
+                    The Dash Behavior needs to be a very rough and fast movement so you’ll set it up with very high
+                    speed and rubber stiffness, but after making the dash happen you need the bot to go back to normal,
+                    that’s where the “Reset Speed” joins the party.
+                </p>
+                <p>
+                    Reset speed will set the Target’s speed to the default one that you set up on his Spawn Behavior.
+                    ( Make sure to set it to the same as the Spawn one )
+                    So after resetting the speed it starts the movement loop again.
+                </p>
+            </section>
+
+           
+            <section id="GauntletScenarios">
+                <h2>Gauntlet Scenarios</h2>
+                <p>Gauntlets are a type of scenario where there’s 2 or more target profiles that run at different times.
+                </p>
+                <p>First of all we need to make sure that we have a behavior that takes the bot out of the playable area
+                    and teleports it outside of it.</p>
+                <p> Make a behavior called "Spawn Out of Map" and set the spawn to outside of the playable area. </p>
+                <p> Second, you will need to make different behaviors for each target, as the example above where i
+                    called them Bot 1, 2 & 3.
+                </p>
+                <p>
+                    All these behaviors have two “Actions” called “Set Target Time” and “On Target Time Reached” which
+                    means that the target has a time where you set it to 0 and it starts counting the Target time from
+                    it.
+                </p>
+                <p>
+                    On Target Time Reached means that after the target gets out of 0 to the time you set up on this
+                    action it will make another action and here is where you set it to Spawn out of map.
+                </p>
+                <p> After you complete these steps you will need to just set up the target's initial behavior delay to
+                    match what timings you want in your scenario.</p>
+            </section>
+    </main>
+
+</body>
+
+</html>
